@@ -21,9 +21,8 @@ public:
     void gotMessage(ofMessage msg);
     
     
-    ofImage image;
     ofFbo fbo;
     
-    float offsetX, hue;
+    float offsetX, hue, alpha;
     bool paused;
 };

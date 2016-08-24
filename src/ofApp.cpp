@@ -2,43 +2,38 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    image.load("sunset.jpg");
     fbo.allocate(ofGetWidth(), ofGetHeight());
     fbo.begin();
     ofClear(0,0,0);
     fbo.end();
     
-    offsetX = 1;
+    offsetX = 8;
     hue = 0;
+    alpha = 255;
     paused = false;
     
     ofSeedRandom();
-    ofSetFrameRate(30);
+    ofBackground(0);
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    //offsetX = ofGetMouseX();
-
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    ofBackground(0);
-    
     if(!paused){
         fbo.begin();
         fbo.draw(offsetX, 0);
         
-        //    image.draw(-498, ofGetHeight()/2 - 250, 500, 500);
         ofColor col;
         for (int i = 0; i < fbo.getHeight(); i++){
             hue = ofMap(ofRandom(0, ofGetHeight()), 0, ofGetHeight(), 0, 255);
             col.setHsb(hue, 255, 255);
-            //            col.a = 200;
+            col.a = alpha;
             ofSetColor(col);
             
-            ofDrawCircle(0, i, 1);
+            ofDrawCircle(0, i, 8);
         }
         fbo.end();
     }
@@ -53,7 +48,6 @@ void ofApp::keyPressed(int key){
             ofToggleFullscreen();
             break;
         case 'r':
-            offsetX = 0;
             fbo.begin();
             ofClear(0);
             fbo.end();
@@ -61,6 +55,8 @@ void ofApp::keyPressed(int key){
         case 'p':
             paused = !paused;
             break;
+        case 'a':
+            alpha = alpha==255 ? 200 : 255;
         default:
             break;
     }
