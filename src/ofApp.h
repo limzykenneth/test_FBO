@@ -23,6 +23,9 @@ public:
     
     ofFbo fbo;
     
+    ofPixels pixels;
+    ofImage image;
+    
     float offsetX, hue, alpha;
     bool paused;
 };

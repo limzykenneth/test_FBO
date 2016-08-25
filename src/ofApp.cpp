@@ -18,13 +18,18 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
+    fbo.readToPixels(pixels);
+    image.setFromPixels(pixels);
+    image.update();
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
     if(!paused){
         fbo.begin();
-        fbo.draw(offsetX, 0);
+//        fbo.draw(offsetX, 0);
+//        texture.draw(offsetX, 0);
+        image.draw(offsetX, 0);
         
         ofColor col;
         for (int i = 0; i < fbo.getHeight(); i++){
